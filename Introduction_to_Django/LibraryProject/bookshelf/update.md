@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CRUD Operations - Update: 
 
 ## Command Instruction: 
@@ -14,3 +15,15 @@ title: Nineteen Eighty-Four
 author: George Orwell
 publication_year: 1949
 `
+=======
+<<<<<<< HEAD
+# Update books
+from bookshelf.models import Book
+book = Book.objects.get(title='1984')
+book.title="Nineteen Eighty-Four"
+book.save()
+=======
+book.title = "Nineteen Eighty-Four"
+book.save()
+>>>>>>> origin/master
+>>>>>>> 16dee7aeb905a470e30d02d3bea5cea76272bc25

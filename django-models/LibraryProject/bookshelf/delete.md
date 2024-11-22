@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CRUD Operations - Delete: 
 
 ## Command Instruction: 
@@ -32,3 +33,8 @@ publication_year: 2005,
 title: Think and grow rich
 author: Someone
 publication_year: 1997]
+=======
+from bookshelf.models import Book
+book = Book.objects.get(title="1984")
+book.delete()
+>>>>>>> 16dee7aeb905a470e30d02d3bea5cea76272bc25
