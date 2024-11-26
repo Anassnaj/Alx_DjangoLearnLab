@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 <!-- list_books.html -->
+=======
+>>>>>>> 16dee7aeb905a470e30d02d3bea5cea76272bc25
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>List of Books</title>
 </head>
 {% if request.user.is_authenticated %}
@@ -30,3 +34,20 @@
     </a>
 </body>
 </html>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Book List</h1>
+    <a href="{% url 'create_book' %}">Add New Book</a>
+    <ul>
+        {% for book in books %}
+            <li>
+                <a href="{% url 'book_details' book.pk %}">{{ book.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+>>>>>>> 16dee7aeb905a470e30d02d3bea5cea76272bc25

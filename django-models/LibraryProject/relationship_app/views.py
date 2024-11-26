@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Library
@@ -108,3 +109,8 @@ def is_member(user):
 @user_passes_test(is_member)
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> 16dee7aeb905a470e30d02d3bea5cea76272bc25
