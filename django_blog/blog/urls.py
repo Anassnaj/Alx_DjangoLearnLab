@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views 
 from django.urls import path
-from .views import post_search, posts_by_tag (
+from .views import post_search, posts_by_tag 
+from .views import PostCreateView, PostUpdateView (
     PostListView,
     PostDetailView,
     PostCreateView,
@@ -36,4 +37,12 @@ urlpatterns += [
 urlpatterns = [
     path('search/', post_search, name='post-search'),
     path('tags/<str:tag_name>/', posts_by_tag, name='tag-posts'),
+]
+
+from django.urls import path
+from .views import PostCreateView, PostUpdateView
+
+urlpatterns = [
+    path('posts/new/', PostCreateView.as_view(), name='post-create'),
+    path('posts/<int:pk>/edit/', PostUpdateView.as_view(), name='post-update'),
 ]

@@ -7,6 +7,11 @@ from .models import Post
 from .models import Comment
 from taggit.models import Tag
 
+class TagWidget(forms.SelectMultiple):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.choices = [(tag.id, tag.name) for tag in Tag.objects.all()]
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -20,7 +25,7 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'content', 'tags']
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
-        widget=forms.CheckboxSelectMultiple,  # Use checkboxes for multiple selection
+        widget=TagWidget,
         required=False
     )
 
