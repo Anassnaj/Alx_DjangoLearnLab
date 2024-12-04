@@ -7,7 +7,7 @@ from .models import Post
 from .models import Comment
 from taggit.models import Tag
 
-class TagWidget(forms.SelectMultiple):
+class TagWidget()(forms.SelectMultiple):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.choices = [(tag.id, tag.name) for tag in Tag.objects.all()]
