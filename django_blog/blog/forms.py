@@ -27,6 +27,6 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
-        widgets = {
+        tagwidget = {
             'content': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Add a comment...'}),
         }
