@@ -18,7 +18,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'content']  # Fields to include in the form
         fields = ['title', 'content', 'tags']
-    tags = forms.ModelMultipleChoiceField(
+    tags = forms.CharField(required=False, help_text="Comma separated tags")
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple,  # Use checkboxes for multiple selection
         required=False
