@@ -17,6 +17,11 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content']  # Fields to include in the form
+        fields = ['title', 'content', 'tags']
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple,  # Use checkboxes for multiple selection
+        required=False
 
 class CommentForm(forms.ModelForm):
     class Meta:

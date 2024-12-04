@@ -149,3 +149,26 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         return self.object.post.get_absolute_url()
 
+from django.db.models import Q
+from django.shortcuts import render
+from .models import Post
+
+def post_search(request):
+    query = request.GET.get('q')
+    posts = Post.objects.all()
+    if query:
+        posts = posts.filter(
+            Q(title__icontains=query) |  # Search in the title
+            Q(content__icontains=query) |  # Search in the content
+            Q(tags__name__icontains=query)  # Search by tag name
+        ).distinct()
+
+    return render(request, 'blog/post_search_results.html', {'posts': posts, 'query': query})
+
+from django.shortcuts import get_object_or_404
+from .models import Tag
+
+def posts_by_tag(request, tag_name):
+    tag = get_object_or_404(Tag, name=tag_name)
+    posts = tag.posts.all()
+    return render(request, 'blog/posts_by_tag.html', {'tag': tag, 'posts': posts})
