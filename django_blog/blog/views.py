@@ -178,7 +178,7 @@ from taggit.models import Tag
 from .models import Post
 
 def posts_by_tag(request, tag_name):
-    tag = Tag.objects.filter(name=tag_name)
+    tag = Post.objects.filter(name=tag_name)
     posts = tag.posts.all()
     return render(request, 'blog/posts_by_tag.html', {'tag': tag, 'posts': posts})
 
