@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+<h1>Create / Edit Post</h1>
+
+  <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}  <!-- This will automatically render the tags field along with other fields -->
+      <button type="submit">Save Post</button>
+  </form>
 <h2>{{ view.object.pk|yesno:"Edit Post,Create Post" }}</h2>
 <form method="POST">
     {% csrf_token %}
@@ -8,14 +15,4 @@
 </form>
 <a href="{% url 'post-list' %}">Cancel</a>
 {% endblock %}
-{% extends 'base_generic.html' %}
 
-{% block content %}
-  <h1>Create / Edit Post</h1>
-
-  <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}  <!-- This will render the form fields (including tags) as <p> tags -->
-      <button type="submit">Save Post</button>
-  </form>
-{% endblock %}
