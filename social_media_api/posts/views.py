@@ -38,3 +38,17 @@ class CommentViewSet(viewsets.ModelViewSet):
             raise PermissionDenied('You can only update your own comments.')
         serializer.save()
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .models import Post
+from .serializers import PostSerializer
+
+class FeedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        followed_users = request.user.following.all()  # Get users that the current user is following
+        posts = Post.objects.filter(author__in=followed_users).order_by('-created_at')  # Get posts from followed users, ordered by creation date
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
