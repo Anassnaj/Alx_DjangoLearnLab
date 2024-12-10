@@ -23,11 +23,11 @@ from rest_framework import status
 User = get_user_model()
 
 class FollowUserView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, user_id):
         try:
-            user_to_follow = CustomUser.objects.all(id=user_id)
+            user_to_follow = CustomUser.objects.all()
         except User.DoesNotExist:
             return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
        
@@ -38,11 +38,11 @@ class FollowUserView(generics.GenericAPIView):
         return Response({"message": f"You are now following {user_to_follow.username}"},status=status.HTTP_200_OK)
 
 class UnfollowUserView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, user_id):
         try:
-            user_to_unfollow = CustomUser.objects.all(id=user_id)
+            user_to_unfollow = CustomUser.objects.all()
         except User.DoesNotExist:
             return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
         if user_to_unfollow == request.user:
