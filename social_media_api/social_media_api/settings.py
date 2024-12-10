@@ -23,10 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!v(7+j3-%3+5!1d)@o&fg#9i)+nni=a%@_j9jppbqh13-05igh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com', 'localhost']
 
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True
 
 # Application definition
 
@@ -88,8 +92,12 @@ WSGI_APPLICATION = 'social_media_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'NAME': 'db.sqlite3',
+        'USER': 'yourdbuser',
+        'PASSWORD': 'yourpassword',
+        'HOST': 'yourdbhost',
+        'PORT': '5432',   
+     }
 }
 
 
@@ -127,7 +135,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'AWS S3'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
